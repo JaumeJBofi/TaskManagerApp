@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{A14CE74D-290E-4A43-81E3-991145188A33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{214CC439-76CF-431E-8234-72CD7A1F05DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManagerApi", "Source\Api\TaskManagerApi\TaskManagerApi.csproj", "{76BE84DC-D146-44B5-806B-181BEEC7D6DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{470F9812-6C36-4C20-9C22-55DCA597D7F9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76BE84DC-D146-44B5-806B-181BEEC7D6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76BE84DC-D146-44B5-806B-181BEEC7D6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76BE84DC-D146-44B5-806B-181BEEC7D6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76BE84DC-D146-44B5-806B-181BEEC7D6DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{214CC439-76CF-431E-8234-72CD7A1F05DA} = {A14CE74D-290E-4A43-81E3-991145188A33}
+		{76BE84DC-D146-44B5-806B-181BEEC7D6DC} = {214CC439-76CF-431E-8234-72CD7A1F05DA}
+	EndGlobalSection
+EndGlobal

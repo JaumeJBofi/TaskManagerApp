@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: taskmanager-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: taskManagerAdmin 
+      MONGO_INITDB_ROOT_PASSWORD: devPass1234! 
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  api:
+    build: 
+      context: . 
+      dockerfile: ./Build/TaskManagerApi.Dockerfile
+    container_name: taskmanager-api
+    ports:
+      - "8000:80" # Map container port 80 to host port 8000
+    depends_on:
+      - mongodb
+    environment: # Here we would insert sensitive variables from our CD
+      - TM_MongoDbConnectionString=mongodb://taskManagerAdmin:devPass1234!@mongodb:27017/TaskManagerDb
+      - TM_JwtKey=SecureKey1234!
+volumes:
+  mongodb_data:
