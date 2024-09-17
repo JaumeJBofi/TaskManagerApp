@@ -87,3 +87,4 @@ C:\Users\Jaume.Bofi\Projects\Code-Synthesis\TaskManagerApp\Source\Api\TaskManage
 C:\Users\Jaume.Bofi\Projects\Code-Synthesis\TaskManagerApp\Source\Api\TaskManagerApi\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\Jaume.Bofi\Projects\Code-Synthesis\TaskManagerApp\Source\Api\TaskManagerApi\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\Jaume.Bofi\Projects\Code-Synthesis\TaskManagerApp\Source\Api\TaskManagerApi\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
+C:\Users\Jaume.Bofi\Projects\Code-Synthesis\TaskManagerApp\Source\Api\TaskManagerApi\obj\Debug\net8.0\TaskManagerApi.sourcelink.json

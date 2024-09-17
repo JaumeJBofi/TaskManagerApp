@@ -26,7 +26,7 @@ namespace TaskManagerApi.Services
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),                    
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),                    
                 }),
 
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),

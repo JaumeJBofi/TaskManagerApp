@@ -30,7 +30,8 @@ namespace TaskManagerApi.Repositories
         }
       
         public async Task<User> CreateAsync(SignInDto newUserDto)
-        {            
+        {
+            if (String.IsNullOrEmpty(newUserDto.UserName)) throw new Exception("Username can't be empty");
             string passwordHash = _passwordService.HashPassword(newUserDto.Password);
             
             var newUser = new User

@@ -3,36 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\controllers\\taskmanagmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\controllers\\taskmanagmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\repositories\\taskrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\repositories\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\repositories\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\services\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\services\\passwordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\services\\passwordservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\middleware\\refreshtokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\middleware\\refreshtokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\taskmanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\taskmanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\taskmanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\taskmanagerapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|solutionrelative:source\\api\\taskmanagerapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76BE84DC-D146-44B5-806B-181BEEC7D6DC}|Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj|c:\\users\\jaume.bofi\\projects\\code-synthesis\\taskmanagerapp\\source\\api\\taskmanagerapi\\utilities\\environmentvariablehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,99 +54,126 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "JwtTokenService.cs",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Services\\JwtTokenService.cs",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Services\\JwtTokenService.cs",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Services\\JwtTokenService.cs",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Services\\JwtTokenService.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwFoAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T22:20:23.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RefreshTokenMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAdAAAAAAAAAA==",
+              "Title": "PasswordService.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Services\\PasswordService.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Services\\PasswordService.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Services\\PasswordService.cs",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Services\\PasswordService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T21:39:42.199Z"
+              "WhenOpened": "2024-09-17T20:28:24.527Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Program.cs",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Program.cs",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Program.cs",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Program.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAADgv0QAAAAAAAAAAAAAAA==",
+              "Title": "TaskManagmentController.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Controllers\\TaskManagmentController.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Controllers\\TaskManagmentController.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Controllers\\TaskManagmentController.cs",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Controllers\\TaskManagmentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T15:48:26.087Z",
+              "WhenOpened": "2024-09-17T19:48:15.118Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAwwGkAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T17:09:53.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAARAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Repositories\\Interfaces\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Repositories\\Interfaces\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T20:21:39.379Z",
+              "WhenOpened": "2024-09-13T21:57:11.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\TaskRepository.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Repositories\\TaskRepository.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Repositories\\TaskRepository.cs*",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Repositories\\TaskRepository.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-13T22:30:11.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RefreshTokenMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Middleware\\RefreshTokenMiddleware.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwCcAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-12T21:39:42.199Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "TaskManagerApi.csproj",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj*",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-09-02T22:06:14.548Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Program.cs",
+              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Program.cs",
+              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Program.cs",
+              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-31T15:48:26.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Models\\User.cs",
               "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Models\\User.cs",
               "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Models\\User.cs",
               "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-12T18:18:47.825Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserDto.cs",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Models\\Dtos\\UserDto.cs",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Models\\Dtos\\UserDto.cs",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Models\\Dtos\\UserDto.cs",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\Models\\Dtos\\UserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T18:04:39.801Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\appsettings.Development.json",
@@ -154,19 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "TaskManagerApi.csproj",
-              "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
-              "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
-              "ToolTip": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
-              "RelativeToolTip": "Source\\Api\\TaskManagerApi\\TaskManagerApi.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-09-02T22:06:14.548Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "EnvironmentVariableHelper.cs",
               "DocumentMoniker": "C:\\Users\\Jaume.Bofi\\Projects\\Code-Synthesis\\TaskManagerApp\\Source\\Api\\TaskManagerApi\\Utilities\\EnvironmentVariableHelper.cs",
               "RelativeDocumentMoniker": "Source\\Api\\TaskManagerApi\\Utilities\\EnvironmentVariableHelper.cs",
