@@ -2,14 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.dev';
+import { Task } from '../models/task';
 
-interface Task {
-  id: number; 
-  title: string;
-  description: string;
-  completed: boolean;
-  // ... other properties
-}
 
 @Injectable({
   providedIn: 'root'

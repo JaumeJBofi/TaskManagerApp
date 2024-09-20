@@ -92,3 +92,4 @@ obj/
 /Source/Ui/task-manager/node_modules
 /.vs/TaskManagerApi
 *.cache
+/Source/Ui/task-manager/.angular

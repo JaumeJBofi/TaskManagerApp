@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../../models/task'; // Assuming you have a Task model
+import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-task-form',
@@ -8,7 +8,7 @@ import { Task } from '../../models/task'; // Assuming you have a Task model
 })
 export class TaskFormComponent {
   @Input() isEditing: boolean = false;
-  @Input() taskData: Task = { id: 0, title: '', description: '', completed: false }; // Initialize with default values
+  @Input() taskData: Task = { id: 0, title: '', description: '',status: 0, dueDate: new Date() }; 
   @Output() taskAdded = new EventEmitter<Task>();
   @Output() taskUpdated = new EventEmitter<Task>();
   @Output() editCanceled = new EventEmitter<void>();
@@ -28,6 +28,6 @@ export class TaskFormComponent {
   }
 
   private resetForm(): void {
-    this.taskData = { id: 0, title: '', description: '', completed: false };
+    this.taskData = { id: 0, title: '', description: '',status: 0, dueDate: new Date() };
   }
 }

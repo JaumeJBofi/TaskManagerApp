@@ -20,10 +20,7 @@
     <tbody>
       <tr *ngFor="let task of tasks">
         <td>{{ task.title }}</td>
-        <td>{{ task.description }}</td>
-        <td>
-          <input type="checkbox" [(ngModel)]="task.completed" (change)="updateTask(task)">
-        </td>
+        <td>{{ task.description }}</td>        
         <td>
           <button (click)="editTask(task)">Edit</button>
           <button (click)="deleteTask(task.id)">Delete</button>

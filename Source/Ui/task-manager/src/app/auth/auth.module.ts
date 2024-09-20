@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // For forms
+import { FormsModule } from '@angular/forms'; 
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -9,8 +9,7 @@ import { AuthRoutingModule } from './auth-routing.module';
   declarations: [LoginComponent, SignupComponent],
   imports: [
     CommonModule,
-    FormsModule,          // Import FormsModule
-    ReactiveFormsModule,  // Or ReactiveFormsModule
+    FormsModule,          // Import FormsModule    
     AuthRoutingModule
   ]
 })
