@@ -87,3 +87,5 @@ bin/
 obj/
 
 .vs/
+/Source/Api/TaskManagerApi/obj
+/.vs
