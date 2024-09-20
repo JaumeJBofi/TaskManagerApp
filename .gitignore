@@ -1,12 +1,89 @@
-.vs/TaskManagerApi/DesignTimeBuild/.dtbcache.v2
-.vs/TaskManagerApi/FileContentIndex/0b8d1612-0d7c-4750-84fa-0993f563b4ae.vsidx
-.vs/TaskManagerApi/FileContentIndex/7c78da92-5ca1-43a0-9374-3b3d8efd0413.vsidx
-.vs/TaskManagerApi/FileContentIndex/8ed6f76d-e13e-42e2-b387-7c2317b5f6d6.vsidx
-.vs/TaskManagerApi/FileContentIndex/2056eca2-e48f-4911-9226-1e06fac589a3.vsidx
-.vs/TaskManagerApi/FileContentIndex/b5a0c1ae-b858-47c3-b45c-f2a79bfe441e.vsidx
-.vs/TaskManagerApi/FileContentIndex/bfe23b4d-3cd3-46ce-ba5f-84967bc7ab14.vsidx
-.vs/TaskManagerApi/FileContentIndex/ce7b7979-2d7b-4f3a-ab51-8d8bd4c1b33d.vsidx
-.vs/TaskManagerApi/FileContentIndex/ff273459-65fa-45fe-a69a-0bbbb90df315.vsidx
-.vs/TaskManagerApi/v17/.suo
-.vs/TaskManagerApi/v17/DocumentLayout.backup.json
-.vs/TaskManagerApi/v17/DocumentLayout.json
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/docs
+
+# Node
+/node_modules
+
+# IDEs and editors
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+*.sln
+*.suo
+*.user
+*.solution
+.cache/
+.vscode/
+
+# Dependencies
+/package-lock.json
+/yarn.lock
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Log files
+/log.txt
+/npm-debug.log
+/yarn-error.log
+/yarn-debug.log
+
+# Local environment files
+.env.local
+.env.*.local
+
+# Compiled CSS and JavaScript files
+*.js.map
+*.css.map
+
+# Coverage reports
+/coverage
+
+# IDE-specific files
+.idea
+.vscode
+*.iml
+
+# Compiled Angular files (adjust if needed)
+# These are typically generated during the build process
+dist
+out-tsc
+.angular/cache
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+
+# IDE/Editor settings
+.idea/
+.vscode/
+
+# Log files
+*.log
+
+# Test output
+/coverage
+
+# Optional: Exclude specific files or folders
+# Example:
+# /src/secrets.ts
+
+# Compiled output
+bin/
+obj/
+
+.vs/
