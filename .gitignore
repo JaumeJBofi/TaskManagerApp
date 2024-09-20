@@ -89,3 +89,6 @@ obj/
 .vs/
 /Source/Api/TaskManagerApi/obj
 /.vs
+/Source/Ui/task-manager/node_modules
+/.vs/TaskManagerApi
+*.cache
