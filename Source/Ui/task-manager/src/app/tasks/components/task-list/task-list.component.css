@@ -1,0 +1,59 @@
+.task-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif; /* Use a consistent font */
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  color: #551a8b; /* Darker purple */
+}
+
+.sign-off-button {
+  margin-top: 1rem;
+  align-self: flex-end; /* Align button to the right */
+  background-color: transparent;
+  border: none;
+  color: #800080; /* Purple */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.task-form-section {
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 500px; /* Adjust as needed */
+}
+
+.task-table {
+  width: 100%;
+  max-width: 800px; /* Adjust as needed */
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+button {
+  background-color: #800080; /* Purple */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 0.5rem; /* Add spacing between buttons */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #551a8b; /* Darker purple */
+}
