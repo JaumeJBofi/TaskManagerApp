@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
+import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { TasksModule } from './tasks/tasks.module';
   imports: [
     CommonModule,
     BrowserModule,  
+    RouterOutlet,
+    HttpClientModule,
     AuthModule,
     TasksModule,
     AppRoutingModule

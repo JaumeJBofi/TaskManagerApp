@@ -52,3 +52,14 @@
     margin-top: 1rem;
   }
 
+/* signup.component.css */
+.signup-button {
+  display: block; /* Make the button take up the full width */
+  margin: 10px auto; /* Center horizontally with auto margin */
+  padding: 10px 20px; /* Add some button padding */
+}
+
+.login-link {
+  text-align: center; /* Center the text */
+  margin-top: 10px; /* Add padding between button and message */ 
+}
