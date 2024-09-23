@@ -93,3 +93,4 @@ obj/
 /.vs/TaskManagerApi
 *.cache
 /Source/Ui/task-manager/.angular
+/Source/Api/TaskManagerApi/bin
