@@ -9,23 +9,23 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = environment.apiBaseUrl + '/tasks'; 
+  private apiUrl = environment.apiBaseUrl + '/TaskManagment/'; 
 
   constructor(private http: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+    return this.http.get<Task[]>(`${this.apiUrl}/GetTasks`);
   }
 
   createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(this.apiUrl, task);
+    return this.http.post<Task>(`${this.apiUrl}/CreateTask`,task);
   }
 
   updateTask(task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${task.id}`, task); 
+    return this.http.put<Task>(`${this.apiUrl}/UpdateTask/${task.id}`, task); 
   }
 
   deleteTask(taskId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${taskId}`);
+    return this.http.delete(`${this.apiUrl}/Delete/${taskId}`);
   }
 }

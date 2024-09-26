@@ -10,7 +10,7 @@ using TaskManagerApi.Utilities;
 
 namespace TaskManagerApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {        
@@ -30,7 +30,7 @@ namespace TaskManagerApi.Controllers
             _antiforgery = antiforgery;
         }
 
-        [HttpPost("/[action]")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInDto signIn)
         {
@@ -61,7 +61,7 @@ namespace TaskManagerApi.Controllers
             });
         }
 
-        [HttpPost("/[action]")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
@@ -92,9 +92,9 @@ namespace TaskManagerApi.Controllers
             });
         }
 
-        [HttpPost("LogOut")]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> LogOut([FromBody] LogoutDto logout)
+        public async Task<IActionResult> Logout([FromBody] LogoutDto logout)
         {
             if (!ModelState.IsValid)
             {

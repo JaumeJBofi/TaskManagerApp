@@ -4,13 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Utilities\NewFolder\**" />
-    <EmbeddedResource Remove="Utilities\NewFolder\**" />
-    <None Remove="Utilities\NewFolder\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
@@ -23,23 +18,23 @@
     <PackageReference Include="zxcvbn-core" Version="7.0.92" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug'">
       <ItemGroup>
-        <None Include="appsettings.Development.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+        <None Include="appsettings.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+        <None Include="appsettings.prod.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" />
       </ItemGroup>
     </When>
     <When Condition="'$(Configuration)' == 'Release'">
-      <ItemGroup>        
-        <None Include="appsettings.Production.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
+      <ItemGroup>
+        <None Include="appsettings.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="Never" />
+        <None Include="appsettings.prod.json" CopyToOutputDirectory="Always" CopyToPublishDirectory="Always" />
       </ItemGroup>
     </When>
 </Choose>
+
+  <ItemGroup>
+    <Folder Include="Utilities\NewFolder\" />
+  </ItemGroup>
 
 </Project>

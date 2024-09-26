@@ -15,9 +15,9 @@
         {
             _configuration = configuration;
 
-            JwtSettings = new JwtSettings(configuration.GetSection("JtwSettings"));
+            JwtSettings = new JwtSettings(configuration.GetSection("JwtSettings"));
             MongoDbDatabaseName = configuration.GetValue<string>("MongoDbDatabaseName") ?? "TaskManagerDb";
-            MongoDbConnectionString = configuration.GetValue<string>("MongoDbDatabaseName") ?? "TaskManagerDb";
+            MongoDbConnectionString = EnvironmentVariableHelper.GetMongoDbConnectionString();
         }
 
         public JwtSettings JwtSettings { get; }
@@ -28,7 +28,7 @@
     public class JwtSettings
     {
         public JwtSettings(IConfigurationSection configSection)
-        {
+        {            
             ValidAudience = configSection.GetValue<string>("ValidAudience") ?? throw new Exception("Audience not found");
             ValidIssuer = configSection.GetValue<string>("ValidIssuer") ?? throw new Exception("Issuer not found");
             AccessTokenExpirationMinutes = configSection.GetValue<int?>("AccessTokenExpirationMinutes") ?? 60;

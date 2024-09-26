@@ -6,8 +6,9 @@ services:
     container_name: taskmanager-mongodb
     restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: taskManagerAdmin 
-      MONGO_INITDB_ROOT_PASSWORD: devPass1234! 
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME} 
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: TaskManagerDb 
     ports:
       - "27017:27017"
     volumes:
@@ -23,8 +24,8 @@ services:
     depends_on:
       - mongodb
     environment: # Here we would insert sensitive variables from our CD
-      - TM_MongoDbConnectionString=mongodb://taskManagerAdmin:devPass1234!@mongodb:27017/TaskManagerDb
-      - TM_JwtKey=SecureKey1234!
+      - TM_MongoDbConnectionString=${TM_MongoDbConnectionString}
+      - TM_JwtKey=${TM_JwtKey}
 
   ui:
     build: 

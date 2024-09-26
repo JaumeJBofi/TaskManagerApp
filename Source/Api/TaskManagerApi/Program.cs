@@ -9,6 +9,9 @@ using TaskManagerApi.Services.Interfaces;
 using TaskManagerApi.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);    
 
 // Add services to the container.
 builder.Services.AddControllers(); // Add support for controllers
@@ -35,6 +38,22 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.SameSite = SameSiteMode.Strict; // Adjust if needed
 });
 
+if(builder.Environment.IsDevelopment())
+{
+    var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: corsPolicy,
+            policy =>
+            {
+                // Allow requests from Angular's localhost origin
+                policy.WithOrigins("http://localhost:4200")
+                      .AllowAnyHeader()  // Allow all headers (you can be more restrictive if needed)
+                      .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, etc.)
+                      .AllowCredentials(); // Allow credentials if needed
+            });
+    });
+}
 
 builder.Services.AddAuthentication(x =>
 {
@@ -74,7 +93,9 @@ builder.Services.AddSingleton(sp =>
 });
 
 builder.Services.AddSingleton<IUserRepository,UserRepository>();
+builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 
+builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
@@ -94,6 +115,9 @@ app.UseMiddleware<RefreshTokenMiddleware>();
 // Enable Authentication and Authorization
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseOpenApi();
+app.UseSwaggerUI();
 
 // Map controllers
 app.MapControllers(); // This line replaces the previous example endpoint
