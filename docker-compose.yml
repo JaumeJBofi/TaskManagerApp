@@ -26,5 +26,17 @@ services:
     environment: # Here we would insert sensitive variables from our CD
       - TM_MongoDbConnectionString=${TM_MongoDbConnectionString}
       - TM_JwtKey=${TM_JwtKey}
+
+  ui:
+    build: 
+      context: ./task-manager
+      dockerfile: Dockerfile
+    container_name: taskmanager-ui
+    ports:
+      - "4200:4200" 
+    depends_on:
+      - api # Ensure the API is running before the UI
+    environment:
+      - API_URL=https://taskmanager-api:8000 # Use the container name for HTTPS communication
 volumes:
   mongodb_data:
