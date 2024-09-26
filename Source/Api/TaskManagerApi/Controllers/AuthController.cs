@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagerApi.Models;
 using TaskManagerApi.Models.Dtos.Authentication;
@@ -17,13 +18,16 @@ namespace TaskManagerApi.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IPasswordService _passwordService;
+        private readonly IAntiforgery _antiforgery;
 
-        public AuthController(IConfig config, IUserRepository userRepository, IJwtTokenService jwtTokenService, IPasswordService passwordService)
+
+        public AuthController(IConfig config, IUserRepository userRepository, IJwtTokenService jwtTokenService, IPasswordService passwordService, IAntiforgery antiforgery)
         {
             _config = config;
             _userRepository = userRepository;
             _jwtTokenService = jwtTokenService;
             _passwordService = passwordService;
+            _antiforgery = antiforgery;
         }
 
         [HttpPost("/[action]")]
@@ -73,14 +77,18 @@ namespace TaskManagerApi.Controllers
                 return Unauthorized(new { message = "Invalid username or password" });
             }
 
-            var accessToken = _jwtTokenService.GenerateAccessToken(user);
-            await SetRefreshTokenCookie(user);
+            var accessToken = _jwtTokenService.GenerateAccessToken(user);                  
 
             await _userRepository.UpdateUserRefreshToken(login.UserName);
 
+            await SetRefreshTokenCookie(user);      
+
+             var csrfToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+
             return Ok(new
             {
-                AccessToken = accessToken,                
+                AccessToken = accessToken,      
+                XsrfToken = csrfToken          
             });
         }
 

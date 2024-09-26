@@ -17,6 +17,8 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: any): Observable<LoginResponse> {
+    //response.xsrfToken
+    //localStorage.setItem('XSRF-TOKEN', token);
     return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials);
   }
 

@@ -25,6 +25,15 @@ var isDev = builder.Environment.IsDevelopment();
 
 var config = new Config(builder.Configuration);
 
+// Configure Antiforgery
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-XSRF-TOKEN";
+    options.Cookie.Name = "XSRF-TOKEN";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Important for HTTPS
+    options.Cookie.SameSite = SameSiteMode.Strict; // Adjust if needed
+});
 
 
 builder.Services.AddAuthentication(x =>
@@ -77,6 +86,8 @@ if (isDev)
 }
 
 app.UseHttpsRedirection();
+
+app.UseAntiforgery();
 
 app.UseMiddleware<RefreshTokenMiddleware>();
 
