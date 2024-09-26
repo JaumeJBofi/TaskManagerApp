@@ -19,8 +19,6 @@ namespace TaskManagerApi.Services
         public string GenerateAccessToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = RSA.Create();
-            key.ImportRSAPrivateKey(_jwtSettings.JwtKey, out _);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -30,7 +28,7 @@ namespace TaskManagerApi.Services
                 }),
 
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),
-                SigningCredentials = new SigningCredentials(new RsaSecurityKey(key), SecurityAlgorithms.RsaSha256)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_jwtSettings.JwtKey), SecurityAlgorithms.HmacSha256)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

@@ -8,6 +8,7 @@ using TaskManagerApi.Models;
 
 namespace TaskManagerApi.Controllers
 {
+    [Route("api/[controller]/[action]")]    
     public class TaskManagmentController : ControllerBase
     {
         private readonly IConfig _config;
