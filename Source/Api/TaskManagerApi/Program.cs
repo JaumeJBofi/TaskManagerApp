@@ -34,9 +34,19 @@ var isDev = builder.Environment.IsDevelopment();
 
 var config = new Config(builder.Configuration);
 
-var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
-if (builder.Environment.IsDevelopment())
-{     
+// Configure Antiforgery
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-XSRF-TOKEN";
+    options.Cookie.Name = "XSRF-TOKEN";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Important for HTTPS
+    options.Cookie.SameSite = SameSiteMode.Strict; // Adjust if needed
+});
+
+if(builder.Environment.IsDevelopment())
+{
+    var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: corsPolicy,
@@ -103,6 +113,8 @@ if (isDev)
 }
 
 app.UseHttpsRedirection();
+
+app.UseAntiforgery();
 
 app.UseMiddleware<RefreshTokenMiddleware>();
 
