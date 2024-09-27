@@ -8,13 +8,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  credentials = { username: '', password: '' };
+  loginDto = { UserName: '', Password: '' };
   error: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.authService.login(this.credentials).subscribe({
+    this.authService.login(this.loginDto).subscribe({
       next: () => {
         this.router.navigate(['/tasks']); // Navigate to tasks on success
       },

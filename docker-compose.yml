@@ -29,14 +29,14 @@ services:
 
   ui:
     build: 
-      context: ./task-manager
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./Build/TaskManagerUI.Dockerfile
     container_name: taskmanager-ui
     ports:
-      - "4200:4200" 
+      - "4200:80" 
     depends_on:
       - api # Ensure the API is running before the UI
     environment:
-      - API_URL=https://taskmanager-api:8000 # Use the container name for HTTPS communication
+      - API_URL=http://taskmanager-api:8000 # Use the container name for HTTPS communication
 volumes:
   mongodb_data:

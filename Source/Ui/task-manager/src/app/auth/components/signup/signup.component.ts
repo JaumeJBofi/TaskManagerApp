@@ -8,17 +8,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
-  formData = { 
-    username: '', 
-    email: '', 
-    password: '' 
+  signInDto = { 
+    UserName: '', 
+    Email: '', 
+    Password: '' 
   };
   error: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   signup() {
-    this.authService.signup(this.formData).subscribe({
+    this.authService.signin(this.signInDto).subscribe({
       next: () => {
         this.router.navigate(['/login']); // Navigate to login on success
       },

@@ -7,7 +7,7 @@
         type="text" 
         id="username" 
         name="username" 
-        [(ngModel)]="formData.username" 
+        [(ngModel)]="signInDto.UserName" 
         required
       >
     </div>
@@ -18,7 +18,7 @@
         type="email" 
         id="email" 
         name="email" 
-        [(ngModel)]="formData.email" 
+        [(ngModel)]="signInDto.Email" 
         required
       >
     </div>
@@ -29,7 +29,7 @@
         type="password" 
         id="password" 
         name="password" 
-        [(ngModel)]="formData.password" 
+        [(ngModel)]="signInDto.Password" 
         required
       >
     </div>

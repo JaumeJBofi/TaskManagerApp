@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
+using System.Text.Json;
 using TaskManagerApi.Middleware;
 using TaskManagerApi.Repositories;
 using TaskManagerApi.Repositories.Interfaces;
@@ -14,7 +15,12 @@ builder.Configuration
     .AddJsonFile($"appsettings{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);    
 
 // Add services to the container.
-builder.Services.AddControllers(); // Add support for controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;    // Use camelCase for deserialization
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;                   // Allow case-insensitive matching
+    }); 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,19 +34,19 @@ var isDev = builder.Environment.IsDevelopment();
 
 var config = new Config(builder.Configuration);
 
-if(builder.Environment.IsDevelopment())
-{
-    var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
+var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
+if (builder.Environment.IsDevelopment())
+{     
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: corsPolicy,
             policy =>
             {
-                // Allow requests from Angular's localhost origin
-                policy.WithOrigins("http://localhost:4200")
-                      .AllowAnyHeader()  // Allow all headers (you can be more restrictive if needed)
-                      .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, etc.)
-                      .AllowCredentials(); // Allow credentials if needed
+
+                //policy.WithOrigins("http://localhost:4200")
+                policy.AllowAnyOrigin()
+                      .AllowAnyHeader()   // Allow all headers (you can be more restrictive if needed)
+                      .AllowAnyMethod();  // Allow all HTTP methods (GET, POST, etc.)                      
             });
     });
 }
@@ -101,11 +107,15 @@ app.UseHttpsRedirection();
 app.UseMiddleware<RefreshTokenMiddleware>();
 
 // Enable Authentication and Authorization
+
+app.UseCors(corsPolicy);
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseOpenApi();
 app.UseSwaggerUI();
+
+
 
 // Map controllers
 app.MapControllers(); // This line replaces the previous example endpoint

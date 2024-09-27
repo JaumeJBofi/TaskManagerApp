@@ -1,20 +1,20 @@
 # Stage 1: Build the Angular application
-FROM node:16-alpine AS build
+FROM node:18-alpine AS build
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY Source/Ui/task-manager/package.json Source/Ui/task-manager/package-lock.json ./
 RUN npm install
-COPY . .
+COPY Source/Ui/task-manager/. .
 RUN npm run build --prod
 
 # Stage 2: Serve the built Angular app with Nginx
 FROM nginx:alpine
 
 # Copy the built Angular app from the previous stage
-COPY --from=build /app/dist/task-manager /usr/share/nginx/html
+COPY --from=build /app/dist/task-manager-ui/browser /usr/share/nginx/html
 
 # Expose port 4200 (default Angular development server port)
-EXPOSE 4200
+EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
