@@ -7,7 +7,7 @@ using TaskManagerApi.Models.Dtos.TaskManagment;
 using TaskManagerApi.Models;
 
 namespace TaskManagerApi.Controllers
-{
+{    
     [Route("api/[controller]/[action]")]    
     public class TaskManagmentController : ControllerBase
     {
@@ -23,6 +23,7 @@ namespace TaskManagerApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<UserTask>>> GetTasks()
         {
             var user = await GetUser();            
@@ -50,6 +51,7 @@ namespace TaskManagerApi.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Policy = "TaskCreate")] // Example policy for task creation
         public async Task<ActionResult<UserTask>> CreateTask(CreateTaskDto createTaskDto)
         {
@@ -61,6 +63,7 @@ namespace TaskManagerApi.Controllers
         }
        
         [HttpPut("{id}")]
+        [ValidateAntiForgeryToken]
         [Authorize(Policy = "TaskUpdate")] 
         public async Task<IActionResult> UpdateTask(UpdateTaskDto updateTaskDto)
         {       
@@ -83,6 +86,7 @@ namespace TaskManagerApi.Controllers
         }
   
         [HttpDelete("{id}")]
+        [ValidateAntiForgeryToken]
         [Authorize(Policy = "TaskDelete")] 
         public async Task<IActionResult> DeleteTask(string id)
         {

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TaskManagerApi.Models;
+using TaskManagerApi.Models.Dtos;
 using TaskManagerApi.Models.Dtos.Authentication;
 using TaskManagerApi.Repositories.Interfaces;
 using TaskManagerApi.Services;
@@ -10,7 +12,7 @@ using TaskManagerApi.Utilities;
 
 namespace TaskManagerApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]/[action]")]    
     [ApiController]
     public class AuthController : ControllerBase
     {        
@@ -77,7 +79,9 @@ namespace TaskManagerApi.Controllers
                 return Unauthorized(new { message = "Invalid username or password" });
             }
 
-            var accessToken = _jwtTokenService.GenerateAccessToken(user);                  
+            var accessInfo = _jwtTokenService.GenerateAccessToken(user);
+
+            HttpContext.User = accessInfo.claimsPrincipal;
 
             await _userRepository.UpdateUserRefreshToken(login.UserName);
 
@@ -87,21 +91,33 @@ namespace TaskManagerApi.Controllers
 
             return Ok(new
             {
-                AccessToken = accessToken,      
-                XsrfToken = csrfToken          
+                AccessToken = accessInfo.token,      
+                XsrfToken = csrfToken,
+                UserDto = new UserDto
+                {
+                    UserName = user.UserName,
+                    Email = user.Email
+                }
             });
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Logout([FromBody] LogoutDto logout)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout([FromBody] UserDto user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _userRepository.GetByUserNameAsync(logout.UserName);
+            var loggedUser = await GetUser();
+            var userToLogOff = await _userRepository.GetByUserNameAsync(user.UserName ?? "");
+
+            if(loggedUser.Id != userToLogOff?.Id)
+            {
+                return Unauthorized();
+            }            
 
             if (user == null)
             {
@@ -111,7 +127,7 @@ namespace TaskManagerApi.Controllers
             Request.Cookies.TryGetValue("refreshToken", out var refreshToken);
             if(refreshToken == null) return BadRequest("Refresh token not found");
 
-            if (await _userRepository.RevokeRefreshToken(logout.UserName, refreshToken))
+            if (await _userRepository.RevokeRefreshToken(loggedUser.UserName, refreshToken))
             {
                 return Ok();
             }
@@ -135,6 +151,13 @@ namespace TaskManagerApi.Controllers
             };
 
             Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);            
+        }
+
+        private async Task<User> GetUser()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new Exception("User id not found in claims");
+            var user = await _userRepository.GetByIdAsync(userId);
+            return user ?? throw new Exception("User not found");
         }
     }
 }

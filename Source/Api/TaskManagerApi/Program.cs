@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 using System.Text.Json;
 using TaskManagerApi.Middleware;
@@ -8,6 +9,9 @@ using TaskManagerApi.Repositories.Interfaces;
 using TaskManagerApi.Services;
 using TaskManagerApi.Services.Interfaces;
 using TaskManagerApi.Utilities;
+using Microsoft.IdentityModel.JsonWebTokens;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -15,7 +19,7 @@ builder.Configuration
     .AddJsonFile($"appsettings{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);    
 
 // Add services to the container.
-builder.Services.AddControllers()
+builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;    // Use camelCase for deserialization
@@ -24,7 +28,32 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c=> {
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer" // Must be "Bearer"
+    });
+
+    // Add a security requirement for the JWT
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer" // Must match the name of the security definition above
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 builder.Services.AddSingleton<IConfig, Config>();
 
 // JWT Configuration
@@ -44,9 +73,9 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.SameSite = SameSiteMode.Strict; // Adjust if needed
 });
 
-if(builder.Environment.IsDevelopment())
-{
-    var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
+var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
+if (builder.Environment.IsDevelopment())
+{    
     builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: corsPolicy,
@@ -60,6 +89,9 @@ if(builder.Environment.IsDevelopment())
             });
     });
 }
+builder.Logging.AddConsole();
+
+builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
 
 builder.Services.AddAuthentication(x =>
 {
@@ -70,6 +102,7 @@ builder.Services.AddAuthentication(x =>
 {
     x.RequireHttpsMetadata = !isDev; 
     x.SaveToken = true;
+    x.UseSecurityTokenValidators = true;
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
@@ -78,6 +111,8 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = !isDev,  
         ValidIssuer = config.JwtSettings.ValidIssuer,
         ValidAudience = config.JwtSettings.ValidAudience,
+        LogValidationExceptions = true,
+        
     };
 });
 
@@ -88,7 +123,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 });
 
-builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
+
 builder.Services.AddSingleton<IPasswordService, PasswordService>();
 
 builder.Services.AddSingleton(sp =>
@@ -124,12 +159,51 @@ app.UseCors(corsPolicy);
 app.UseAuthentication();
 app.UseAuthorization();
 
+//app.UseMiddleware<LoggingMiddleware>();
+
 app.UseOpenApi();
 app.UseSwaggerUI();
-
 
 
 // Map controllers
 app.MapControllers(); // This line replaces the previous example endpoint
 
 app.Run();
+public class LoggingMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<LoggingMiddleware> _logger;
+    private readonly IJwtTokenService _jwtTokenService;
+    public LoggingMiddleware(RequestDelegate next,IJwtTokenService jwtService, ILogger<LoggingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+        _jwtTokenService = jwtService;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        // Call the next middleware in the pipeline
+
+
+        string? authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+        string? token = null;
+
+        // Check if the authorization header is present and has the "Bearer " prefix
+        if (!string.IsNullOrEmpty(authorizationHeader) && authorizationHeader.StartsWith("Bearer "))
+        {
+            // Extract the token from the header
+            token = authorizationHeader.Substring("Bearer ".Length).Trim();
+        }
+
+        _jwtTokenService.VerifyToken(token);
+        // Check if authentication failed
+        if (context.User.Identity.IsAuthenticated == false)
+        {
+            _logger.LogWarning("Authentication failed for user. Request: {RequestPath}", context.Request.Path);
+            // Optionally log additional context information
+        }
+
+        await _next(context);
+    }
+}

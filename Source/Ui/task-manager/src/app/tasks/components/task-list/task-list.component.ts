@@ -47,7 +47,7 @@ export class TaskListComponent implements OnInit {
     }
   }
 
-  onSignOff(): void {
+  onLogOut(): void {
     this.authService.logout(); // Call your logout method from AuthService
   }
 }

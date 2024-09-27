@@ -12,7 +12,7 @@ namespace TaskManagerApi.Utilities
 
         public static string GetMongoDbConnectionString()
         {
-            return "mongodb://taskManagerAdmin:devPass1234!@localhost:27017/TaskManagerDb?authSource=admin";
+            return "mongodb://taskManagerAdmin:devPass1234!@localhost:27016/TaskManagerDb?authSource=admin";
             //return GetValue("TM_MongoDbConnectionString");
         }
 

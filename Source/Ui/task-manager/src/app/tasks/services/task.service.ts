@@ -9,7 +9,7 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = environment.apiBaseUrl + '/TaskManagment/'; 
+  private apiUrl = environment.apiBaseUrl + '/TaskManagment'; 
 
   constructor(private http: HttpClient) { }
 
