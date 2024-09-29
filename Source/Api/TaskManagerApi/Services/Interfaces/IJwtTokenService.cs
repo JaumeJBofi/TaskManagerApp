@@ -5,10 +5,10 @@ namespace TaskManagerApi.Services
 {
     public interface IJwtTokenService
     {
-        (string token,ClaimsPrincipal claimsPrincipal) GenerateAccessToken(User user);
+        string GenerateAccessToken(User user);
         string GenerateRefreshToken();
         bool IsAccessTokenExpired(string token);
-        string? GetUserNameFromToken(string token);
+        string? GetUserIdFromToken(string token);
 
         bool VerifyToken(string token);
 

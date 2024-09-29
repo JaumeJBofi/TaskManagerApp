@@ -32,6 +32,14 @@ namespace TaskManagerApi.Controllers
             _antiforgery = antiforgery;
         }
 
+
+        [HttpPost]
+        [Authorize]            
+        public ActionResult IsUserLogged()
+        {
+            return Ok();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn([FromBody] SignInDto signIn)
@@ -64,7 +72,7 @@ namespace TaskManagerApi.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        [AllowAnonymous]        
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
             if (!ModelState.IsValid)
@@ -79,19 +87,17 @@ namespace TaskManagerApi.Controllers
                 return Unauthorized(new { message = "Invalid username or password" });
             }
 
-            var accessInfo = _jwtTokenService.GenerateAccessToken(user);
-
-            HttpContext.User = accessInfo.claimsPrincipal;
+            var token = _jwtTokenService.GenerateAccessToken(user);      
 
             await _userRepository.UpdateUserRefreshToken(login.UserName);
 
-            await SetRefreshTokenCookie(user);      
-
-             var csrfToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+            await SetRefreshTokenCookie(user);
+            
+            var csrfToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken;            
 
             return Ok(new
             {
-                AccessToken = accessInfo.token,      
+                AccessToken = token,      
                 XsrfToken = csrfToken,
                 UserDto = new UserDto
                 {
@@ -101,28 +107,18 @@ namespace TaskManagerApi.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost]        
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout([FromBody] UserDto user)
-        {
+        public async Task<IActionResult> Logout()
+        {           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             var loggedUser = await GetUser();
-            var userToLogOff = await _userRepository.GetByUserNameAsync(user.UserName ?? "");
-
-            if(loggedUser.Id != userToLogOff?.Id)
-            {
-                return Unauthorized();
-            }            
-
-            if (user == null)
-            {
-                return Unauthorized(new { message = "Invalid username" });
-            }
+          
 
             Request.Cookies.TryGetValue("refreshToken", out var refreshToken);
             if(refreshToken == null) return BadRequest("Refresh token not found");
@@ -138,19 +134,18 @@ namespace TaskManagerApi.Controllers
         }
         
         private async Task SetRefreshTokenCookie(User user)
-        {
-            var refreshToken = _jwtTokenService.GenerateRefreshToken();
-            var dateTime = await _userRepository.UpdateUserRefreshToken(user.UserName); 
+        {                        
+            var tokenInfo = await _userRepository.UpdateUserRefreshToken(user.UserName); 
 
             var cookieOptions = new CookieOptions
             {
-                HttpOnly = true,
-                Secure = true, 
-                Expires = dateTime.AddHours(1),
-                SameSite = SameSiteMode.Strict 
+                HttpOnly = true,                
+                Expires = tokenInfo.expireDate,
+                Secure = true,
+                SameSite = SameSiteMode.None                
             };
-
-            Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);            
+            
+            Response.Cookies.Append("refreshToken", tokenInfo.token, cookieOptions);            
         }
 
         private async Task<User> GetUser()

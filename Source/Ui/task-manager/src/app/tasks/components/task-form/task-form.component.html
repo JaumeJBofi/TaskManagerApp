@@ -1,15 +1,32 @@
 <div class="task-form-container">
   <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+    <!-- Title -->
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" id="title" name="title" [(ngModel)]="taskData.title" required>
     </div>
 
+    <!-- Description -->
     <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" name="description" [(ngModel)]="taskData.description"></textarea>
     </div>
 
+    <!-- Task Type (Dropdown) -->
+    <div class="form-group">
+      <label for="taskType">Task Type:</label>
+      <select id="taskType" name="taskType" [(ngModel)]="taskData.status">
+        <option *ngFor="let type of statusTypes" [value]="type.value">{{ type.display }}</option>
+      </select>
+    </div>
+
+    <!-- Due Date -->
+    <div class="form-group">
+      <label for="dueDate">Due Date:</label>
+      <input type="date" id="dueDate" name="dueDate"  (ngModelChange)="updateDueDate($event)" [(ngModel)]="dueDateInput">
+    </div>
+
+    <!-- Buttons -->
     <button type="submit" [disabled]="!taskForm.valid">
       {{ isEditing ? 'Update Task' : 'Add Task' }}
     </button>

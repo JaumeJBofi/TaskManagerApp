@@ -31,21 +31,25 @@ namespace TaskManagerApi.Middleware
                     if (context.Request.Cookies.TryGetValue("refreshToken", out var refreshToken))
                     {
                         // Validate the refresh token
-                        var userName = _jwtTokenService.GetUserNameFromToken(accessToken); // Extract username from expired token
-                        
-                        if (userName != null && await _userRepository.ValidateRefreshToken(userName, refreshToken))
+                        var id = _jwtTokenService.GetUserIdFromToken(accessToken); // Extract username from expired token
+                        if (id != null)
                         {
-                            // Generate a new access token
-                            var user = await _userRepository.GetByUserNameAsync(userName);
-                            if(user != null)
+                            var user = await _userRepository.GetByIdAsync(id);
+                            if (user != null && await _userRepository.ValidateRefreshToken(user.UserName, refreshToken))
                             {
-                                var newAccessToken = _jwtTokenService.GenerateAccessToken(user);
+                                // Generate a new access token                            
+                                if (user != null)
+                                {
+                                    var newAccessToken = _jwtTokenService.GenerateAccessToken(user);
 
-                                // Set the new access token in the response header
-                                context.Response.Headers["Authorization"] = "Bearer " + newAccessToken;
-                            }                            
+                                    // Set the new access token in the response header
+                                    context.Response.Headers["AccessRefresh"] = newAccessToken;
+                                    context.Request.Headers["Authorization"] = "Bearer " + newAccessToken;
+                                }
+                            }
                         }
                     }
+       
                 }
             }
 

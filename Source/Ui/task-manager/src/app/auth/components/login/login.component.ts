@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginDto = { UserName: '', Password: '' };
+  loginDto = { userName: '', password: '' };
   error: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -19,7 +19,7 @@ export class LoginComponent {
         this.router.navigate(['/tasks']); // Navigate to tasks on success
       },
       error: (err) => {
-        this.error = err.message; // Display error message
+        alert("The user couldn't be logged in: " + err?.error?.message);          
       }
     });
   }

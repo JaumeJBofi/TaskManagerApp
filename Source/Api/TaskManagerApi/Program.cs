@@ -10,6 +10,8 @@ using TaskManagerApi.Services;
 using TaskManagerApi.Services.Interfaces;
 using TaskManagerApi.Utilities;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.AspNetCore.Authorization;
+using TaskManagerApi.Handlers;
 
 
 
@@ -23,6 +25,7 @@ builder.Services.AddControllersWithViews()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;    // Use camelCase for deserialization
+        options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;                   // Allow case-insensitive matching
     }); 
 
@@ -70,7 +73,8 @@ builder.Services.AddAntiforgery(options =>
     options.Cookie.Name = "XSRF-TOKEN";
     options.Cookie.HttpOnly = true;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Important for HTTPS
-    options.Cookie.SameSite = SameSiteMode.Strict; // Adjust if needed
+    options.Cookie.SameSite = SameSiteMode.None; // Adjust if needed        
+    
 });
 
 var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
@@ -81,11 +85,11 @@ if (builder.Environment.IsDevelopment())
         options.AddPolicy(name: corsPolicy,
             policy =>
             {
-
-                //policy.WithOrigins("http://localhost:4200")
-                policy.AllowAnyOrigin()
+                policy.WithOrigins("http://localhost:54184")
+                //policy.AllowAnyOrigin()
                       .AllowAnyHeader()   // Allow all headers (you can be more restrictive if needed)
-                      .AllowAnyMethod();  // Allow all HTTP methods (GET, POST, etc.)                      
+                      .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, etc.)                      
+                      .AllowCredentials();
             });
     });
 }
@@ -111,20 +115,15 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = !isDev,  
         ValidIssuer = config.JwtSettings.ValidIssuer,
         ValidAudience = config.JwtSettings.ValidAudience,
-        LogValidationExceptions = true,
-        
+        ValidateLifetime = true,
+        LogValidationExceptions = true                
     };
 });
 
-
-// Add Authorization policies (example)
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-});
-
-
 builder.Services.AddSingleton<IPasswordService, PasswordService>();
+
+builder.Services.AddAuthorization();
+builder.Services.AddSingleton<IAuthorizationHandler, AdminAuthorizationHandler>();
 
 builder.Services.AddSingleton(sp =>
 {    
@@ -135,6 +134,8 @@ builder.Services.AddSingleton(sp =>
 
 builder.Services.AddSingleton<IUserRepository,UserRepository>();
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
+
+
 
 builder.Services.AddOpenApiDocument();
 
@@ -149,6 +150,7 @@ if (isDev)
 
 app.UseHttpsRedirection();
 
+
 app.UseAntiforgery();
 
 app.UseMiddleware<RefreshTokenMiddleware>();
@@ -159,7 +161,6 @@ app.UseCors(corsPolicy);
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UseMiddleware<LoggingMiddleware>();
 
 app.UseOpenApi();
 app.UseSwaggerUI();
@@ -169,41 +170,4 @@ app.UseSwaggerUI();
 app.MapControllers(); // This line replaces the previous example endpoint
 
 app.Run();
-public class LoggingMiddleware
-{
-    private readonly RequestDelegate _next;
-    private readonly ILogger<LoggingMiddleware> _logger;
-    private readonly IJwtTokenService _jwtTokenService;
-    public LoggingMiddleware(RequestDelegate next,IJwtTokenService jwtService, ILogger<LoggingMiddleware> logger)
-    {
-        _next = next;
-        _logger = logger;
-        _jwtTokenService = jwtService;
-    }
 
-    public async Task InvokeAsync(HttpContext context)
-    {
-        // Call the next middleware in the pipeline
-
-
-        string? authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
-        string? token = null;
-
-        // Check if the authorization header is present and has the "Bearer " prefix
-        if (!string.IsNullOrEmpty(authorizationHeader) && authorizationHeader.StartsWith("Bearer "))
-        {
-            // Extract the token from the header
-            token = authorizationHeader.Substring("Bearer ".Length).Trim();
-        }
-
-        _jwtTokenService.VerifyToken(token);
-        // Check if authentication failed
-        if (context.User.Identity.IsAuthenticated == false)
-        {
-            _logger.LogWarning("Authentication failed for user. Request: {RequestPath}", context.Request.Path);
-            // Optionally log additional context information
-        }
-
-        await _next(context);
-    }
-}

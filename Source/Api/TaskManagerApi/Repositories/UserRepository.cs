@@ -65,25 +65,26 @@ namespace TaskManagerApi.Repositories
         public async Task<User?> GetByUserNameAsync(string userName)
         {
             return await _usersCollection.Find(x => x.UserName == userName).FirstOrDefaultAsync();            
-        }      
+        }
 
-        public async Task<DateTime> UpdateUserRefreshToken(string userName)
+        public async Task<(string token, DateTime expireDate)> UpdateUserRefreshToken(string userName)
         {
             var currentTime = DateTime.Now;
             var expireDate = DateTime.Now.AddMinutes(_config.JwtSettings.RefreshTokenExpirationMinutes);
+            var token = _jwtTokenService.GenerateRefreshToken(); 
 
             var updateResult = await _usersCollection.UpdateOneAsync(
                 filter: x => x.UserName == userName,
-                update: Builders<User>.Update.Set(x => x.RefreshToken, _jwtTokenService.GenerateRefreshToken()).Set(x => x.RefreshTokenExpiry, expireDate)
+                update: Builders<User>.Update.Set(x => x.RefreshToken, token).Set(x => x.RefreshTokenExpiry, expireDate)
             );
 
-            return expireDate;
+            return (token,expireDate);
         }
 
         public async Task<bool> RevokeRefreshToken(string userName,string refreshToken)
         {
             var user = await GetByUserNameAsync(userName);
-            if (user == null || user.RefreshToken == refreshToken) return false;
+            if (user == null || user.RefreshToken != refreshToken) return false;
 
             var filter = Builders<User>.Filter.Eq(x => x.UserName, userName);
             var update = Builders<User>.Update.Set(x => x.RefreshToken, null).Set(x => x.RefreshTokenExpiry, null);

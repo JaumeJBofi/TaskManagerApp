@@ -17,19 +17,17 @@ import { AuthInterceptor } from './auth/services/auth-interceptor.service';
     CommonModule,
     BrowserModule,  
     RouterOutlet,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN', // Match with your server-side cookie
+      headerName: 'X-XSRF-TOKEN' // Match with your server-side header
+    }),
     HttpClientModule,
     AuthModule,
     TasksModule,
     AppRoutingModule
   ],
   providers: [
-    importProvidersFrom(HttpClientModule),
-    importProvidersFrom(
-        HttpClientXsrfModule.withOptions({
-        cookieName: 'XSRF-TOKEN',
-        headerName: 'X-XSRF-TOKEN',
-      })
-    ),
+   
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

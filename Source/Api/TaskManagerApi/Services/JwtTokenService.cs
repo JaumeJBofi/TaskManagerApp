@@ -18,27 +18,25 @@ namespace TaskManagerApi.Services
             _signingKey = new SymmetricSecurityKey(_jwtSettings.JwtKey);
         }
 
-        public (string token, ClaimsPrincipal claimsPrincipal) GenerateAccessToken(User user)
+        public string GenerateAccessToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
-            var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                new Claim(ClaimsConstants.Role, RoleConstants.User)
+            };    
             
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = claimsIdentity,
+                Subject = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme),                
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),
-                SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256)
+                SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256),                
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return (token: tokenHandler.CreateEncodedJwt(tokenDescriptor), claimsPrincipal);
+            return tokenHandler.CreateEncodedJwt(tokenDescriptor);
         }
 
         public string GenerateRefreshToken()
@@ -77,15 +75,13 @@ namespace TaskManagerApi.Services
         public bool IsAccessTokenExpired(string token)
         {
             var jwtToken = new JwtSecurityToken(token);
-            return jwtToken.ValidTo < DateTime.Now;
+            return jwtToken.ValidTo < DateTime.UtcNow;
         }
 
-        public string? GetUserNameFromToken(string token)
+        public string? GetUserIdFromToken(string token)
         {
             var jwtToken = new JwtSecurityToken(token);
-            var userName = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-
-            return userName;
+            return jwtToken.Claims.FirstOrDefault(c => c.Type == "nameid")?.Value;            
         }
 
     }

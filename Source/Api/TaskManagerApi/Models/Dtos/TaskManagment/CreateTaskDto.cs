@@ -5,7 +5,6 @@
         public required string Title {  get; set; }
         public string? Description { get; set; }
         public DateTime? DueDate { get; set; }
-        public required int Status { get; set; }
-        public required string UserName { get; set; }
+        public required TASK_STATUS Status { get; set; }        
     }
 }

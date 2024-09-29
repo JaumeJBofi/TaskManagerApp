@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using TaskManagerApi.Models.Dtos.TaskManagment;
 using TaskManagerApi.Models;
+using YamlDotNet.Core.Tokens;
+using TaskManagerApi.Models.Dtos;
 
 namespace TaskManagerApi.Controllers
 {    
@@ -22,15 +24,17 @@ namespace TaskManagerApi.Controllers
             _taskRepository = taskRepository;
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpGet]                
+        [Authorize(Roles = RoleConstants.User)]
         public async Task<ActionResult<IEnumerable<UserTask>>> GetTasks()
         {
-            var user = await GetUser();            
-            return Ok(await _taskRepository.GetUserTasksAsync(user));
+            var user = await GetUser();
+            var userTakDtos = (await _taskRepository.GetUserTasksAsync(user)).Select(o=> new UserTaskDto(o)).ToList();
+            return Ok(userTakDtos);
         }
        
         [HttpGet("{id}")]
+        [Authorize(Roles = RoleConstants.User)]
         public async Task<ActionResult<UserTask>> GetTask(string id)
         {
             var task = await _taskRepository.GetByIdAsync(id);
@@ -47,26 +51,35 @@ namespace TaskManagerApi.Controllers
                 return Unauthorized(); 
             }
 
-            return Ok(task);
+            return Ok(new UserTaskDto(task));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "TaskCreate")] // Example policy for task creation
-        public async Task<ActionResult<UserTask>> CreateTask(CreateTaskDto createTaskDto)
+        [Authorize(Roles = RoleConstants.User)]
+        public async Task<ActionResult<UserTask>> CreateTask([FromBody]CreateTaskDto createTaskDto)
         {
-            // Get the user's ID from the claims
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = await GetUser();
 
             var newTask = await _taskRepository.CreateAsync(createTaskDto, user);
-            return CreatedAtAction(nameof(GetTask), new { id = newTask.Id }, newTask);
+            return Ok(new UserTaskDto(newTask));
         }
        
         [HttpPut("{id}")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "TaskUpdate")] 
-        public async Task<IActionResult> UpdateTask(UpdateTaskDto updateTaskDto)
-        {       
+        [Authorize(Roles = RoleConstants.User)]
+        public async Task<IActionResult> UpdateTask([FromBody] UpdateTaskDto updateTaskDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var existingTask = await _taskRepository.GetByIdAsync(updateTaskDto.Id);
 
             if (existingTask == null)
@@ -87,7 +100,7 @@ namespace TaskManagerApi.Controllers
   
         [HttpDelete("{id}")]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "TaskDelete")] 
+        [Authorize(Roles = RoleConstants.User)]
         public async Task<IActionResult> DeleteTask(string id)
         {
             var task = await _taskRepository.GetByIdAsync(id);

@@ -4,16 +4,18 @@
   <button class="sign-off-button" (click)="onLogOut()">Log out</button>
 
   <div class="task-form-section">
-    <h3>Add New Task</h3>
-    <app-task-form (taskAdded)="addTask($event)"></app-task-form> 
+    <h3>{{ isEditing ? 'Edit Task' : 'Add New Task' }}</h3>
+    <app-task-form (taskAdded)="addTask($event)" (taskUpdated)="updateTask($event)" 
+    (editCanceled)="editCanceled()" [isEditing]="isEditing" [taskData]="taskData" ></app-task-form> 
   </div>
 
   <table class="task-table">
     <thead>
       <tr>
         <th>Title</th>
-        <th>Description</th>
-        <th>Completed</th>
+        <th>Description</th>        
+        <th>Status</th>    
+        <th>DueDate</th>    
         <th>Actions</th>
       </tr>
     </thead>
@@ -21,6 +23,8 @@
       <tr *ngFor="let task of tasks">
         <td>{{ task.title }}</td>
         <td>{{ task.description }}</td>        
+        <td>{{ displayStatus(task.status) }}</td>        
+        <td>{{ task.dueDate  | date:'MM/dd/yyyy' }}</td>        
         <td>
           <button (click)="editTask(task)">Edit</button>
           <button (click)="deleteTask(task.id)">Delete</button>

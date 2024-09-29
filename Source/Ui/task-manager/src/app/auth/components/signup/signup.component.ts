@@ -9,9 +9,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignupComponent {
   signInDto = { 
-    UserName: '', 
-    Email: '', 
-    Password: '' 
+    userName: '', 
+    email: '', 
+    password: '' 
   };
   error: string | null = null;
 
@@ -23,7 +23,7 @@ export class SignupComponent {
         this.router.navigate(['/login']); // Navigate to login on success
       },
       error: (err) => {
-        this.error = err.message; // Display error message
+        alert("The user couldn't be created: " + err?.error?.message);        
       }
     });
   }

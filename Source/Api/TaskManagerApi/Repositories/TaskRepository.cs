@@ -28,7 +28,7 @@ namespace TaskManagerApi.Repositories
                 Title = createTask.Title,
                 Description = createTask.Description,
                 DueDate = createTask.DueDate,
-                Status = (TASK_STATUS)createTask.Status
+                Status = createTask.Status
             };
 
             await _tasksCollection.InsertOneAsync(newTask);
