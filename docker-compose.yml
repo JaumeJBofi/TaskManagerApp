@@ -20,10 +20,14 @@ services:
       dockerfile: ./Build/TaskManagerApi.Dockerfile
     container_name: taskmanager-api
     ports:
-      - "8000:80" # Map container port 80 to host port 8000
+      - "8001:8080"        
+      - "8443:443"   
     depends_on:
       - mongodb
     environment: # Here we would insert sensitive variables from our CD
+      - ASPNETCORE_URLS=https://+:443;http://+:8080
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CertPass}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/etc/ssl/certs/aspnetapp.pfx
       - TM_MongoDbConnectionString=${TM_MongoDbConnectionString}
       - TM_JwtKey=${TM_JwtKey}
 
@@ -32,11 +36,12 @@ services:
       context: .
       dockerfile: ./Build/TaskManagerUI.Dockerfile
     container_name: taskmanager-ui
-    ports:
-      - "4200:80" 
+    ports:      
+      - "4220:443"  # HTTPS
+      - "4200:80"    # Optional, if you still want HTTP support
     depends_on:
       - api # Ensure the API is running before the UI
     environment:
-      - API_URL=http://taskmanager-api:8000 # Use the container name for HTTPS communication
+      - API_URL=https://taskmanager-api:8443 # Use the container name for HTTPS communication
 volumes:
   mongodb_data:

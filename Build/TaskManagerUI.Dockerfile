@@ -13,8 +13,13 @@ FROM nginx:alpine
 # Copy the built Angular app from the previous stage
 COPY --from=build /app/dist/task-manager-ui/browser /usr/share/nginx/html
 
-# Expose port 4200 (default Angular development server port)
-EXPOSE 80
+COPY Source/Ui/task-manager/cert.pem /etc/ssl/certs/cert.pem
+COPY Source/Ui/task-manager/key.pem /etc/ssl/private/key.pem
 
+COPY Source/Ui/task-manager/nginx.conf /etc/nginx/nginx.conf
+
+
+EXPOSE 443
+EXPOSE 80
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

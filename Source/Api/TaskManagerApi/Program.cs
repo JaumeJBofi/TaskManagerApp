@@ -27,8 +27,9 @@ builder.Services.AddControllersWithViews()
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;    // Use camelCase for deserialization
         options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;                   // Allow case-insensitive matching
-    }); 
+    });
 
+    
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen( c=> {
@@ -72,27 +73,23 @@ builder.Services.AddAntiforgery(options =>
     options.HeaderName = "X-XSRF-TOKEN";
     options.Cookie.Name = "XSRF-TOKEN";
     options.Cookie.HttpOnly = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Important for HTTPS
-    options.Cookie.SameSite = SameSiteMode.None; // Adjust if needed        
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // Important for HTTPS
+    options.Cookie.SameSite = SameSiteMode.None;    
     
 });
 
 var corsPolicy = "AllowFrontendLocalhost"; // You can name the policy anything you want
-if (builder.Environment.IsDevelopment())
-{    
-    builder.Services.AddCors(options =>
-    {
-        options.AddPolicy(name: corsPolicy,
-            policy =>
-            {
-                policy.WithOrigins("http://localhost:54184")
-                //policy.AllowAnyOrigin()
-                      .AllowAnyHeader()   // Allow all headers (you can be more restrictive if needed)
-                      .AllowAnyMethod()  // Allow all HTTP methods (GET, POST, etc.)                      
-                      .AllowCredentials();
-            });
-    });
-}
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicy,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200", "https://localhost:4220")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
 builder.Logging.AddConsole();
 
 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
@@ -147,6 +144,7 @@ if (isDev)
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(corsPolicy);
 
 app.UseHttpsRedirection();
 
@@ -157,7 +155,6 @@ app.UseMiddleware<RefreshTokenMiddleware>();
 
 // Enable Authentication and Authorization
 
-app.UseCors(corsPolicy);
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -1,7 +1,11 @@
 # Use the official ASP.NET Core runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 80
+
+COPY Source/Api/TaskManagerApi/aspnetapp.pfx /etc/ssl/certs/aspnetapp.pfx
+
+# Expose port 8080 instead of 80 and 443 if you want the app to bind to it
+EXPOSE 8080
 EXPOSE 443
 
 # Build stage
@@ -24,3 +28,4 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "TaskManagerApi.dll"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]

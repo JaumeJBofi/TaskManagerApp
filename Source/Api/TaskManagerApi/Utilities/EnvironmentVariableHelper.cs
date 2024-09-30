@@ -6,14 +6,14 @@ namespace TaskManagerApi.Utilities
     {
         public static byte[] GetJwtKey()
         {                        
-            return Encoding.ASCII.GetBytes("ThisIsMySuperSecureSecretKey1234!");
-            //return Encoding.ASCII.GetBytes(GetValue("TM_JwtKey"));
+            //return Encoding.ASCII.GetBytes("ThisIsMySuperSecureSecretKey1234!");
+            return Encoding.ASCII.GetBytes(GetValue("TM_JwtKey"));
         }
 
         public static string GetMongoDbConnectionString()
         {
-            return "mongodb://taskManagerAdmin:devPass1234!@localhost:27016/TaskManagerDb?authSource=admin";
-            //return GetValue("TM_MongoDbConnectionString");
+            //return "mongodb://taskManagerAdmin:devPass1234!@localhost:27016/TaskManagerDb?authSource=admin";
+            return GetValue("TM_MongoDbConnectionString");
         }
 
         public static string GetValue(string key)

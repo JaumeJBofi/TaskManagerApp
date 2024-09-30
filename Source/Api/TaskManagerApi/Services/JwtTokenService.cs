@@ -11,11 +11,13 @@ namespace TaskManagerApi.Services
     {
         private readonly JwtSettings _jwtSettings;
         private readonly SymmetricSecurityKey _signingKey;
+        private readonly IConfig _config;
 
         public JwtTokenService(IConfig config)
         {
+            _config = config;
             _jwtSettings = config.JwtSettings;
-            _signingKey = new SymmetricSecurityKey(_jwtSettings.JwtKey);
+            _signingKey = new SymmetricSecurityKey(_jwtSettings.JwtKey);            
         }
 
         public string GenerateAccessToken(User user)
@@ -26,13 +28,15 @@ namespace TaskManagerApi.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimsConstants.Role, RoleConstants.User)
-            };    
-            
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme),                
+                Subject = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme),
                 Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessTokenExpirationMinutes),
-                SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256),                
+                Audience = _config.JwtSettings.ValidAudience,
+                Issuer = _config.JwtSettings.ValidIssuer,
+                SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256),
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -55,8 +59,8 @@ namespace TaskManagerApi.Services
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = _signingKey,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,                    
+                    ValidateIssuer = true,
+                    ValidateAudience = true,                    
                     ValidAudience = _jwtSettings.ValidAudience,
                     ValidIssuer = _jwtSettings.ValidIssuer
                 };
