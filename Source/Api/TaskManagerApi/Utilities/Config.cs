@@ -27,6 +27,7 @@
 
     public class JwtSettings
     {
+        public JwtSettings() { }
         public JwtSettings(IConfigurationSection configSection)
         {            
             ValidAudience = configSection.GetValue<string>("ValidAudience") ?? throw new Exception("Audience not found");

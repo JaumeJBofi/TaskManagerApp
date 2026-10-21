@@ -4,12 +4,9 @@ namespace TaskManagerApi.Models.Dtos.Authentication
 {
     public class SignInDto
     {
-        public SignInDto() { }
-        [Required]
-        public required string UserName { get; set; }
-        [Required]
-        public required string Password { get; set; }
-        [Required]
-        public required string Email { get; set; }
+        public SignInDto() { }        
+        public string? UserName { get; set; }        
+        public string? Password { get; set; }        
+        public string? Email { get; set; }
     }
 }
